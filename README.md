@@ -1,1 +1,1 @@
-# analytics_dbt_demo
+# dbt Analytics Demo
