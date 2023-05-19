@@ -85,7 +85,7 @@ adjust_campaign_paramter_for_google_cpc as(
         case
             /* if you have the custom gadscampaign url parameter to distinguish Google Ads campaigns use it */
             when source = 'google' and medium = 'cpc' and session_gadscampaign is not null then session_gadscampaign
-            /* only since the gadscampaign parameter is present in all countries we can identifie pmax campaigns that don't come from the feed */
+            /* only since the gadscampaign parameter is present in all countries we can identify pmax campaigns that don't come from the feed */
             when event_date_dt >= '2023-04-08'and source = 'google' and medium = 'cpc' and session_gadscampaign is null then 'generic_paid_pmax'
             /* before we have our custom campaign parameter use the landing page pagetype as proxy for the campaign */
             when event_date_dt < '2023-04-08' and source = 'google' and medium = 'cpc' and page_pagetype like('productdetail') then 'generic_paid_shopping'
