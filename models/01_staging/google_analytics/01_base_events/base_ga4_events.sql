@@ -13,7 +13,7 @@
     }}
 {% endif %}
 
--- Incrementally load the raw data from the events_ and events_intraday tables
+/* Incrementally load the raw data from the events_ and events_intraday tables */
 with source_data as (
 
     select
@@ -56,7 +56,7 @@ with source_data as (
 
 ),
 
--- Add a unique key for the user that checks for user_id and then user_pseudo_id
+/* Add a unique key for the user that checks for user_id and then user_pseudo_id */
 add_user_key as (
 
     select
@@ -71,7 +71,7 @@ add_user_key as (
 
 ), 
 
--- Add unique keys for sessions
+/* Add unique keys for sessions */
 include_session_key as (
 
     select
