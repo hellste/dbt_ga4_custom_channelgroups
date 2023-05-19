@@ -8,7 +8,7 @@ The following resources were used as input for the logic and code syntax and are
 - https://github.com/Velir/dbt-ga4
 
 ## How can this repository help you? :thinking:
-If you see shortcomings in the GA4 default channel groups in the GA4 UI, or if you are in need of session level channel groups in your GA4 raw data for reporting or other purposes this repository may be for you.
+If you see shortcomings in the GA4 custom channel groups in the GA4 UI, or if you are in need of session level channel groups in your GA4 raw data for reporting or other purposes this repository may be for you.
 If you use dbt you can use the documented code blocks with some minor adjustments. If you do not use dbt the code may still give you some inspiration on the process.
 
 ## How good are the results? :nerd_face:
