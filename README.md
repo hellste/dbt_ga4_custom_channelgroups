@@ -1,4 +1,4 @@
-# Welcome to this GA4 Custom Channel Groups Repository :wave:
+# Welcome to this dbt GA4 Custom Channel Groups Repository :wave:
 
 This repository contains one possible solution to rebuild custom session level channel groups with GA4 raw data.
 The goal of the contained code is to bring the GA4 raw data as close as possible to the session level custom channel groups displayed in the GA4 UI.
