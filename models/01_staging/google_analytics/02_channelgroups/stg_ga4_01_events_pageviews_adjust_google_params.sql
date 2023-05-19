@@ -28,8 +28,8 @@ with ga4_unnested_pageview_event_data as(
         {{ unnest_key_with_null_default('event_params', 'medium') }} as medium,
         {{ unnest_key_with_null_default('event_params', 'campaign') }} as campaign,
         {{ unnest_key_with_null_default('event_params', 'gclid') }} as gclid,
-        {{ unnest_key_with_null_default('event_params', 'session_gadscampaign') }} as session_gadscampaign, /* gbraid and wbraid parameters as custom parameter extracted from the URL */
-        {{ unnest_key_with_null_default('event_params', 'session_gadsbraid') }} as session_gadsbraid, /* custom parameter to distinguish Google Ads campaign types */
+        {{ unnest_key_with_null_default('event_params', 'session_gadscampaign') }} as session_gadscampaign, /* custom parameter to distinguish Google Ads campaign types */ 
+        {{ unnest_key_with_null_default('event_params', 'session_gadsbraid') }} as session_gadsbraid, /* gbraid and wbraid parameters as custom parameter extracted from the URL */
         {{ unnest_key_with_null_default('event_params', 'entrances', value_type = "int_value") }} as entrances,
         page_referrer,
         page_location
