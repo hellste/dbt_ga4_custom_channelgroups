@@ -16,7 +16,7 @@ models:
           severity: warn
   columns:
     - name: sk_id
-      description: the unique id for each event (currently with uniqueness issues)
+      description: the unique id for each event
       meta: 
         primary-key: true
       tests:
