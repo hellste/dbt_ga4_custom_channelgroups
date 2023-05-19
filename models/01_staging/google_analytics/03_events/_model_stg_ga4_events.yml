@@ -1,0 +1,28 @@
+version: 2
+
+models:
+
+- name: stg_ga4_events_sessionstart
+  description: this model shows all GA4 session_start events which are used to calculate sessions
+  meta:
+    owner: "@Helena S"
+  tests: 
+    - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
+        date_col: event_date_dt
+        date_part: day # (Optional. Default is 'day')
+        test_start_date: '{{ modules.datetime.date.today() - modules.datetime.timedelta(10) }}'
+        test_end_date: '{{ modules.datetime.date.today() }}'
+        config:
+          severity: warn
+  columns:
+    - name: sk_id
+      description: the unique id for each event (currently with uniqueness issues)
+      meta: 
+        primary-key: true
+      tests:
+        - not_null
+        - dbt_expectations.expect_column_values_to_be_unique:
+            row_condition: "event_date_dt between date_sub(current_date(), interval 10 day) and date_sub(current_date(), interval 1 day)" # (Optional)
+            config:
+              severity: warn
+              warn_if: ">1000"

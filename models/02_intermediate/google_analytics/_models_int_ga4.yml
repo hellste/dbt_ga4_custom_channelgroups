@@ -1,0 +1,7 @@
+version: 2
+
+models:
+  - name: int_ga4_aggr_sessions
+    description: Aggregate the session count to frequently required dimensions
+    meta:
+      owner: "@Helena S"

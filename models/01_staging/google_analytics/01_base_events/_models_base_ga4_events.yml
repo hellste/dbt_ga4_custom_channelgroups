@@ -1,0 +1,7 @@
+
+version: 2
+models:
+  - name: base_ga4_events
+    description: this model loads data from the ga4 events table in BigQuery and replaces the last two date partitions to account for late arriving hits
+
+

@@ -1,0 +1,10 @@
+version: 2
+sources:
+
+  - name: ga4_bz_overall
+    schema: 'analytics_{your_property_id}'
+    database: '{your_bigquery_project_name}'
+    loader: 'data_transfer'
+    tables:
+      - name: ga4_bz_overall_events
+        identifier: events_* #This naming schema combined with the load statements in the base model automatically includes the intraday data
