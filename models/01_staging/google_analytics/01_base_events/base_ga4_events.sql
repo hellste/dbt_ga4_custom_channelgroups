@@ -65,7 +65,7 @@ add_user_key as (
         case
             when user_id is not null then to_base64(md5(user_id))
             when user_pseudo_id is not null then to_base64(md5(user_pseudo_id))
-            else null -- this case is reached when privacy settings are enabled
+            else null /* this case is reached when privacy settings are enabled */
         end as user_key
     from source_data
 
@@ -76,7 +76,7 @@ include_session_key as (
 
     select
         *,
-        -- Surrogate key to determine unique session across users. Sessions do NOT reset after midnight in GA4
+        /* Surrogate key to determine unique session across users. Sessions do NOT reset after midnight in GA4 */
         to_base64(md5(CONCAT(CAST(user_key as STRING), cast(ga_session_id as STRING)))) as session_key
     from add_user_key
 
