@@ -1,7 +1,7 @@
 
 {% docs description_ga4_session_channelgroups %}
 ### Data Origin
-The data is transfered from GA4 to BigQuery via the automatic data transfer that can be configured in the GA4 UI.
+The data is transferred from GA4 to BigQuery via the automatic data transfer that can be configured in the GA4 UI.
 
 ### Data Processing in dbt
 
