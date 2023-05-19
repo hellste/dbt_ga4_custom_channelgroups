@@ -5,11 +5,11 @@ The data is transferred from GA4 to BigQuery via the automatic data transfer tha
 
 ### Data Processing in dbt
 
-#### 00_sesssions_non_pageview
+#### 00_sessions_non_pageview
 There are sessions in the raw data that don't have a page_view but only a session_start event and one or more other events.
-These sessions can only exist because the user has been on our page before, started a session and then came back with a direct entrance later.
+These sessions can only exist because the user has been on our page before, started a session and then came back with a direct entrance later where he didn't trigger a new page load.
 To include these sessions in the channel groups logic, this model extracts all sessions without a page_view event. They are later joined to the 01 Model.
-As the user has been on our site before these sessions will be assigned a source through the last_user_source logic.
+As the user has been on our site before these sessions will be assigned a source through the last-non-direct-user-source logic.
 
 #### 01_events_pageviews_adjust_google_params
 This model incrementally pulls all page_view events from the base_ga4_events model and unnests the parameters that are required for the session source assignment.
@@ -29,9 +29,9 @@ Model 02 finds the first session source and the last non-direct session source f
 For sessions that start with a direct entrance, the last source that can be found for this user within the last 30 days is extracted.
 
 #### 04_session_channelgroups
-This final model combines the information of the previous models to finally assign the session traffic source to each session key.
+This final model combines the information of the previous models to finally assign the session traffic source to each session_key.
 If a session starts with a traffic source this source is assigned. 
-If there is no session traffic source, the last known user traffic source is assigned to a session key.
+If there is no session traffic source, the last-non-direct-user-source is assigned to a session_key.
 
 ### Who oversees the data pipeline and how? 
 The responsibility for the tables lies with Helena Steurer as owner of the BigQuery dbt pipeline.
