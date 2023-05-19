@@ -3,6 +3,10 @@
 This repository contains one possible solution to rebuild custom session level channel groups with GA4 raw data.
 The goal of the contained code is to bring the GA4 raw data as close as possible to the session level custom channel groups displayed in the GA4 UI.
 
+The following resources were used as input for the logic and code syntax and are definitely worth a look/read:
+- https://tanelytics.com/ga4-bigquery-session-traffic_source/
+- https://github.com/Velir/dbt-ga4
+
 ## How can this repository help you? :thinking:
 If you see shortcomings in the GA4 default channel groups in the GA4 UI, or if you are in need of session level channel groups in your GA4 raw data for reporting or other purposes this repository may be for you.
 If you use dbt you can use the documented code blocks with some minor adjustments. If you do not use dbt the code may still give you some inspiration on the process.
