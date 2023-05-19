@@ -1,2 +1,2 @@
-# dbt_analytics_demo
-This repository exists to create demo cases for events and public speeches.
+# dbt_ga4_custom_channelgroups
+This repository contains the custom GA4 channel group logic developed for the Bergzeit GmbH.
