@@ -17,9 +17,9 @@ The data on this stage is still on the event level.
 In the GA4 raw data source, medium and campaign parameters are not correctly assigned if the user arrives via a Google Ads Campaign. 
 This is considered a bug and will hopefully be resolved in the future. In the meantime source, medium and campaign must be reassigned correctly for Google Ads traffic.
 The model checks if there is a gclid, wbraid or gbraid parameter present in the page_view event. 
-If one of these parameters is present, the source is set to 'google', the medium is set to 'cpc'.
-The gads_campaign parameter is a custom parameter added to the url by us to distinguish the types of Google Ads campaigns (shopping, search or brand paid).
-If it is present it is set as campaign parameter. For historical data, before the gads_campaign parameter is present, the page_pagetype is used as proxy. 
+If one of these parameters is present, and if the source is empty or already contains 'google', the source is set to 'google' and the medium is set to 'cpc'. This way other ad partners who also utilize the gclid are unaffected by the reassignment.
+The session_gadscampaign parameter is a custom parameter added to the url by us to distinguish the types of Google Ads campaigns (shopping, search or brand paid).
+If it is present it is set as campaign parameter. For historical data, before the session_gadscampaign parameter is present, the page_pagetype is used as proxy. 
 If the user arrived on a PDP it is considered a shopping entrance, if he arrived on the homepage a brand paid entrance and else a generic paid search entrance.
 
 #### 02_session_first_and_last_source
