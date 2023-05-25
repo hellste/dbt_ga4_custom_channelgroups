@@ -74,19 +74,19 @@ unnest_parameters as(
         case when first_value_session is not null then first_value_session.source
             when first_value_session is null and last_non_direct_source_user is not null then last_non_direct_source_user.source
             else null 
-        end as source,
+        end as session_source,
         case when first_value_session is not null then first_value_session.medium
             when first_value_session is null and last_non_direct_source_user is not null then last_non_direct_source_user.medium
             else null 
-        end as medium,
+        end as session_medium,
         case when first_value_session is not null then first_value_session.campaign
             when first_value_session is null and last_non_direct_source_user is not null then last_non_direct_source_user.campaign
             else null 
-        end as campaign,
+        end as session_campaign,
         case when first_value_session is not null then first_value_session.page_pagetype
             when first_value_session is null and last_non_direct_source_user is not null then last_non_direct_source_user.page_pagetype
             else null 
-        end as page_pagetype
+        end as session_page_pagetype
     from join_last_user_source
         
 ),
@@ -95,7 +95,7 @@ add_channel_group as(
 
     select
         *,
-        {{ custom_ga4_channelgroups('source', 'medium', 'campaign', 'page_pagetype') }} as channel_group
+        {{ custom_ga4_channelgroups('session_source', 'session_medium', 'session_campaign', 'session_page_pagetype') }} as session_channel_group
     from unnest_parameters
     
 )
