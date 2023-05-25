@@ -51,10 +51,10 @@ session_source_data as(
 
     select
         session_key,
-        source as session_source,
-        medium as session_medium,
-        campaign as session_campaign,
-        channel_group as session_channelgroup
+        session_source,
+        session_medium,
+        session_campaign,
+        session_channel_group
     from {{ ref('stg_ga4_04_session_channelgroups') }}
     where
 
