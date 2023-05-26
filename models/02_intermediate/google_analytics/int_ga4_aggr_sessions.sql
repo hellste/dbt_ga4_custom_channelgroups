@@ -4,7 +4,7 @@ with ga4_sessions_daily as (
         event_date_dt,
         page_device,
         page_hostname,
-        session_channelgroup,
+        session_channel_group,
         session_source,
         session_medium,
         session_campaign,
