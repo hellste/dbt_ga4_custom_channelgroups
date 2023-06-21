@@ -42,7 +42,7 @@ with ga4_unnested_pageview_event_data as(
             {% if is_incremental() %}
                 event_date_dt between _dbt_max_partition and date_sub(current_date(), interval 1 day) 
             {% else %}
-                event_date_dt between {{ get_last_n_days_date_range(60) }}
+                event_date_dt between {{ get_last_n_days_date_range(120) }}
             {% endif %}
         {% endif %}
 
@@ -85,13 +85,11 @@ adjust_campaign_paramter_for_google_cpc as(
         case
             /* if you have the custom gadscampaign url parameter to distinguish Google Ads campaigns use it */
             when source = 'google' and medium = 'cpc' and session_gadscampaign is not null then session_gadscampaign
-            /* only since the gadscampaign parameter is present in all countries we can identify pmax campaigns that don't come from the feed */
-            when event_date_dt >= '2023-04-08'and source = 'google' and medium = 'cpc' and session_gadscampaign is null then 'generic_paid_pmax'
-            /* before we have our custom campaign parameter use the landing page pagetype as proxy for the campaign */
-            when event_date_dt < '2023-04-08' and source = 'google' and medium = 'cpc' and page_pagetype like('productdetail') then 'generic_paid_shopping'
-            when event_date_dt < '2023-04-08' and source = 'google' and medium = 'cpc' and page_pagetype like('start') then 'brand_paid_search'
-            when event_date_dt < '2023-04-08' and source = 'google' and medium = 'cpc' and page_pagetype not in('productdetail', 'start') then 'generic_paid_search'
-            else campaign
+            /* before we have our custom campaign parameter use the landing page pagetype as proxy for the campaign */    
+            when source = 'google' and medium = 'cpc' and session_gadscampaign is null and page_pagetype like('start') then 'brand_paid_search'
+            when source = 'google' and medium = 'cpc' and session_gadscampaign is null and page_pagetype like('productdetail') then 'generic_paid_shopping'
+            when source = 'google' and medium = 'cpc' and session_gadscampaign is null and page_pagetype not in('productdetail', 'start') then 'generic_paid_search'
+        else campaign
         end as campaign
     from adjust_source_medium_parameters_for_google_cpc
 
