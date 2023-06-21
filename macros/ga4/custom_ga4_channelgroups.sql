@@ -1,5 +1,5 @@
 
-{% macro custom_ga4_channel_groups(source, medium, campaign, pagetype="'none'") %}
+{% macro custom_ga4_channelgroups(source, medium, campaign, pagetype="'none'") %}
 
     case 
         when {{ source }} = 'google' and {{ medium }} = 'cpc' and (regexp_contains({{campaign}},  '_2_|_3_') or {{ campaign }} = 'generic_paid_search')
