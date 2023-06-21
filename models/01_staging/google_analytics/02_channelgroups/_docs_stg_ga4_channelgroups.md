@@ -26,7 +26,7 @@ If the user arrived on a PDP it is considered a shopping entrance, if he arrived
 Model 02 finds the first session source and the last non-direct session source for each session_key.
 
 #### 03_session_last_user_source
-For sessions that start with a direct entrance, the last source that can be found for this user within the last 30 days is extracted.
+For sessions that start with a direct entrance, the last source that can be found for this user within the last 90 days is extracted.
 
 #### 04_session_channelgroups
 This final model combines the information of the previous models to finally assign the session traffic source to each session_key.
