@@ -31,7 +31,7 @@ with session_source_data as(
 
 ),
 
-last_value_per_user_last_30_days as(
+last_value_per_user_last_90_days as(
 
     select
         event_date_dt,
@@ -39,14 +39,15 @@ last_value_per_user_last_30_days as(
         session_key,
         session_start_time,
         ifnull(first_value_session,
-                last_value(last_non_null_value_session ignore nulls) over(sessions_30day_window))
+                last_value(last_non_null_value_session ignore nulls) over(sessions_90day_window))
          as last_non_direct_source_user
     from session_source_data
-    window sessions_30day_window as (partition by user_key order by session_start_time asc range between 2592000 preceding and 1 preceding)
+    window sessions_90day_window as (partition by user_key order by session_start_time asc range between 7776000 preceding and 1 preceding)
     /* day window in seconds */
+    /* 7776000 = 90 days */
     /* 2592000 = 30 days */
     /* 1209600 = 14 days */
 
 )
 
-select * from last_value_per_user_last_30_days
+select * from last_value_per_user_last_90_days
