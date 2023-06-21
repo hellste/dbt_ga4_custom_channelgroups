@@ -1,10 +1,10 @@
 
-{% macro custom_ga4_channelgroups(source, medium, campaign, pagetype) %}
+{% macro custom_ga4_channel_groups(source, medium, campaign, pagetype="'none'") %}
 
     case 
-        when {{ source }} = 'google' and {{ medium }} = 'cpc' and {{ campaign }} = 'generic_paid_search'
+        when {{ source }} = 'google' and {{ medium }} = 'cpc' and (regexp_contains({{campaign}},  '_2_|_3_') or {{ campaign }} = 'generic_paid_search')
             then 'Generic Paid Search Google'
-        when {{ source }} = 'google' and {{ medium }} = 'cpc' and {{ campaign }} in('generic_paid_shopping','generic_paid_pmax')
+        when {{ source }} = 'google' and {{ medium }} = 'cpc' and (regexp_contains({{campaign}},  '_4_|_6_') or {{ campaign }} in('generic_paid_shopping','generic_paid_pmax'))
             then 'Generic Paid Shopping Google'
         when {{ source }} = 'bing' and {{ medium }} = 'cpc' and not regexp_contains({{ campaign }},  '_5_|_1_')
             then 'Generic Paid Search Bing'
@@ -29,7 +29,7 @@
             then 'Triggermail Parcellab'
         when {{ source }} = 'triggermail' and {{ medium }} = 'email'
             then 'Triggermail CRM'
-        when regexp_contains({{ source }}, 'facebook|instagram|pinterest|youtube') and {{ medium }} in('cpc','cpm')
+        when regexp_contains({{ source }}, 'facebook|instagram|pinterest|youtube') and {{ medium }} in('cpc')
             then 'Social Paid'
         when regexp_contains({{ source }}, 'facebook|instagram|pinterest|youtube|strava|linkedin|IGShopping') and {{ medium }} in('social', 'referral','Social')
             then 'Social Organic'
@@ -40,7 +40,7 @@
         when regexp_contains({{ source }}, 'manuf|edelrid|redchiliclimbing.com|sn-supernatural.com|komperdell.com|vaude.com|trollkids.com|houdinisportswear.com|locator.suunto.com|martini-sportswear.com|mountain-equipment.de|maier-sports.com|gonso.de|brandwidgets.outtra.com|chillaz.com|alpina-sports.com')
             then 'Hersteller Links'
         when regexp_contains({{ source }}, 'criteo') or {{ source }} in('bsmart') or regexp_contains({{ campaign }}, '_5_')
-        or ({{ source }} = 'google' and {{ medium }} = 'cpc' and {{ campaign }} = 'display')
+            or ({{ source }} = 'google' and {{ medium }} = 'cpc' and {{ campaign }} = 'display')
             then 'Display'
         when {{ medium }} = 'referral' 
             then 'Referral'
