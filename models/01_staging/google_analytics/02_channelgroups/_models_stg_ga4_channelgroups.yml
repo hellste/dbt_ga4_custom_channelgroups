@@ -50,7 +50,7 @@ models:
       owner: "@Helena S"
 
   - name: stg_ga4_03_session_last_user_source
-    description: Gets the last non-null traffic-source for each session from the last 30 days.
+    description: Gets the last non-null traffic-source for each session from the last 90 days.
     meta:
       owner: "@Helena S"
 
