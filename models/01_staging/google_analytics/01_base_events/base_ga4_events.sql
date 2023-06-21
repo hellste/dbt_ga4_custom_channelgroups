@@ -50,7 +50,7 @@ with source_data as (
         {% if is_incremental() %}
             parse_date('%Y%m%d', regexp_extract(_table_suffix,'[0-9]+')) in ( {{ partitions_to_replace | join(',') }}  )
         {% else %}
-            parse_date('%Y%m%d', regexp_extract(_table_suffix,'[0-9]+')) between {{ get_last_n_days_date_range(60) }}
+            parse_date('%Y%m%d', regexp_extract(_table_suffix,'[0-9]+')) between {{ get_last_n_days_date_range(120) }}
         {% endif %}
     {% endif %}
 
