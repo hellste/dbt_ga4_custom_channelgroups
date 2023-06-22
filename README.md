@@ -15,7 +15,7 @@ For this to work you need to configure a custom URL parameter in Google Ads that
 2. The second approach uses Google Ads BigQuery Transfer Data to match the campaign name via the gclid (model name: stg_ga4_01_events_pageviews_adjust_google_params).
 This approach works for historical data as well as recent data and should be preferred if possible. For this approach to work, you need to configure BigQuery Data Transfers for all of your Google Ads Accounts. Among a variety of information these Data Transfers contain information about the gclid and campaign name. With this information you can build a matching table that joins the Google Ads campaign name to the GA4 raw data via the gclid.
 
-Apart from these two approaches to correct Google Ads traffic parameters the models are the same. In both cases the same last-non-direct-click logic is applied to identify the session traffic source.
+Apart from these two approaches to correct Google Ads traffic parameters the code is the same. The same last-non-direct-click logic is applied to identify the session traffic source.
 
 ## How can this repository help you?
 If you see shortcomings in the custom channel groups in the GA4 UI, or if you are in need of session level channel groups in your GA4 raw data for reporting or other purposes this repository may be for you.
