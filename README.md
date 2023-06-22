@@ -9,7 +9,7 @@ The following resources were used as input for the logic and code syntax and are
 - https://github.com/Velir/dbt-ga4
 
 ## What are the two solutions that are explained here?
-The two different approaches concern the correction of source, medium and campaign parameters for Google Ads Traffic. Due to a bug in the auto tagging feature the traffic parameters for Google Ads Traffic are not assigned correctly in the raw data (at least still at the time of creation of this repository).
+The two different approaches concern the correction of source, medium and campaign parameters for Google Ads Traffic. Due to a bug in the auto tagging feature the traffic parameters for Google Ads Traffic are not assigned correctly in the raw data (at least still not at the time of creation of this repository).
 1. The first approach uses a custom URL parameter to correct the Google Ads traffic parameters (model name: stg_ga4_01_events_pageviews_adjust_google_params_urlparam).
 For this to work you need to configure a custom URL parameter in Google Ads that contains the high level information which type of campaign you are dealing with (in the Bergzeit case SEA Brand, SEA Non-Brand, Display and Shopping). The reassignment works well as soon as this parameter is available. For historical data that misses this parameter the model uses the landing page type as indicator for the campaign which is not ideal but rather an approximation.
 2. The second approach uses Google Ads BigQuery Transfer Data to match the campaign name via the gclid (model name: stg_ga4_01_events_pageviews_adjust_google_params).
