@@ -1,0 +1,97 @@
+version: 2
+
+sources:
+  - name: google_ads_transfer_v2
+    schema: google_ads_transfer_v2
+    database: adsdataprediction
+    loader: "data_transfer"
+    meta:
+      owner: "@Chris G"
+    
+    tables:
+      # brand click stats and campaign tables
+      - name: gads_click_stats_de_brand
+        identifier: p_ads_ClickStats_xxxxxxxx
+      - name: gads_campaigns_de_brand
+        identifier: p_ads_Campaign_xxxxxxxx
+
+      - name: gads_click_stats_at_brand
+        identifier: p_ads_ClickStats_xxxxxxxx
+      - name: gads_campaigns_at_brand
+        identifier: p_ads_Campaign_xxxxxxxx
+        
+      - name: gads_click_stats_ch_brand
+        identifier: p_ads_ClickStats_xxxxxxxx
+      - name: gads_campaigns_ch_brand
+        identifier: p_ads_Campaign_xxxxxxxx
+        
+      # de brand geo table
+      - name: gads_brand_geostats_de
+        identifier: p_ads_GeoStats_xxxxxxxx
+        
+      # de tables
+      - name: gads_shopping_product_stats_de
+        identifier: p_ads_ShoppingProductStats_xxxxxxxx
+        tests: 
+        - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
+            date_col: segments_date
+            date_part: day # (Optional. Default is 'day')
+            test_start_date: '2022-07-01'
+            test_end_date: '{{ modules.datetime.date.today() }}'
+            config:
+              severity: warn
+      - name: gads_search_query_stats_de
+        identifier: p_ads_SearchQueryStats_xxxxxxxx
+      - name: gads_click_stats_de
+        identifier: p_ads_ClickStats_xxxxxxxx
+      - name: gads_campaigns_de
+        identifier: p_ads_Campaign_xxxxxxxx
+      - name: gads_campaign_stats_de
+        identifier: p_ads_CampaignStats_xxxxxxxx
+      - name: gads_ads_stats_de
+        identifier: p_ads_AdStats_xxxxxxxx
+      - name: gads_ads_de
+        identifier: p_ads_Ad_xxxxxxxx
+      - name: gads_adgroups_de
+        identifier: p_ads_AdGroup_xxxxxxxx
+      - name: gads_adgroup_stats_de
+        identifier: p_ads_AdGroupStats_xxxxxxxx
+      - name: gads_criteria_de
+        identifier: p_ads_AdGroupCriterion_xxxxxxxx
+      - name: gads_keywords_de
+        identifier: p_ads_Keyword_xxxxxxxx
+    
+      # at tables
+      - name: gads_shopping_product_stats_at
+        identifier: p_ads_ShoppingProductStats_xxxxxxxx
+        tests: 
+        - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
+            date_col: segments_date
+            date_part: day # (Optional. Default is 'day')
+            test_start_date: '2022-07-01'
+            test_end_date: '{{ modules.datetime.date.today() }}'
+            config:
+              severity: warn
+      - name: gads_search_query_stats_at
+        identifier: p_ads_SearchQueryStats_xxxxxxxx
+      - name: gads_click_stats_at
+        identifier: p_ads_ClickStats_xxxxxxxx
+      - name: gads_campaigns_at
+        identifier: p_ads_Campaign_xxxxxxxx
+      - name: gads_campaign_stats_at
+        identifier: p_ads_CampaignStats_xxxxxxxx
+      - name: gads_ads_stats_at
+        identifier: p_ads_AdStats_xxxxxxxx
+      - name: gads_ads_at
+        identifier: p_ads_Ad_xxxxxxxx
+      - name: gads_adgroups_at
+        identifier: p_ads_AdGroup_xxxxxxxx
+      - name: gads_adgroup_stats_at
+        identifier: p_ads_AdGroupStats_xxxxxxxx
+      - name: gads_criteria_at
+        identifier: p_ads_AdGroupCriterion_xxxxxxxx
+      - name: gads_keywords_at
+        identifier: p_ads_Keyword_xxxxxxxx
+
+
+    # other countries as applicable
