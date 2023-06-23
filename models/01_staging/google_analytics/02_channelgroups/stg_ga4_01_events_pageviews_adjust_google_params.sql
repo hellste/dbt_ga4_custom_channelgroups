@@ -38,20 +38,12 @@ with ga4_unnested_pageview_event_data as(
         event_name = 'page_view'
 
         {% if target.name == 'dev' %}
-            and event_date_dt = date_sub(current_date(), interval 2 day)
+            and event_date_dt between {{ get_last_n_days_date_range(2) }}
         {% else %}
             {% if is_incremental() %}
-                and(
-                    event_date_dt between _dbt_max_partition and date_sub(current_date(), interval 1 day)
-                    or
-                    event_date_dt between date_sub(_dbt_max_partition, interval 1 year) and date_sub(date_sub(current_date(), interval 1 year), interval 1 day)
-                )
+                    and event_date_dt between _dbt_max_partition and date_sub(current_date(), interval 1 day)
             {% else %}
-                and(
-                    event_date_dt between {{ get_last_n_days_date_range(120) }}
-                    or
-                    event_date_dt between {{ get_last_n_days_prev_year(120) }}
-                )
+                    and event_date_dt between {{ get_last_n_days_date_range(120) }}
             {% endif %}
         {% endif %}
 
@@ -71,16 +63,12 @@ gclid_campaign_name_matching_table as(
     where
 
         {% if target.name == 'dev' %}
-            date = date_sub(current_date(), interval 2 day)
+            date between {{ get_last_n_days_date_range(2) }}
         {% else %}
             {% if is_incremental() %}               
-                date between _dbt_max_partition and date_sub(current_date(), interval 1 day)
-                or
-                date between date_sub(_dbt_max_partition, interval 1 year) and date_sub(date_sub(current_date(), interval 1 year), interval 1 day)               
+                date between _dbt_max_partition and date_sub(current_date(), interval 1 day)               
             {% else %}
-                date between {{ get_last_n_days_date_range(120) }}
-                or
-                date between {{ get_last_n_days_prev_year(120) }}           
+                date between {{ get_last_n_days_date_range(120) }}          
             {% endif %}
         {% endif %} 
 ),
@@ -167,16 +155,12 @@ sessions_with_no_pageview as(
     where
 
         {% if target.name == 'dev' %}
-            event_date_dt = date_sub(current_date(), interval 2 day)
+            event_date_dt between {{ get_last_n_days_date_range(2) }}
         {% else %}
             {% if is_incremental() %}
                 event_date_dt between _dbt_max_partition and date_sub(current_date(), interval 1 day)
-                or
-                event_date_dt between date_sub(_dbt_max_partition, interval 1 year) and date_sub(date_sub(current_date(), interval 1 year), interval 1 day)
             {% else %}
                 event_date_dt between {{ get_last_n_days_date_range(30) }}
-                or
-                event_date_dt between {{ get_last_n_days_prev_year(30) }}
             {% endif %}
         {% endif %}
 
