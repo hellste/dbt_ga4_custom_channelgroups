@@ -58,3 +58,6 @@ vars:
   
   # for stg models run in dev table sampling can be applied. This variable specifies the sampling percent.
   dev_table_sampling: 5
+
+  # List of all google ads countries
+  gads_countries: ['de', 'at', 'ch', 'nl', 'be', 'it', 'uk', 'dk', 'se', 'fr', 'cz', 'fi', 'no', 'pl']
