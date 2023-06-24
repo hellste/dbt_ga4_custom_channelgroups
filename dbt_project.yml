@@ -60,4 +60,4 @@ vars:
   dev_table_sampling: 5
 
   # List of all google ads countries
-  gads_countries: ['de', 'at', 'ch', 'nl', 'be', 'it', 'uk', 'dk', 'se', 'fr', 'cz', 'fi', 'no', 'pl']
+  gads_countries: ['de', 'at']
