@@ -16,8 +16,8 @@ with all_campaign_names_historic as (
             last_value(campaign_name) over (partition by campaign_id order by date(_PARTITIONTIME) asc) as campaign_name_last_value
         from {{ source('google_ads_transfer_v2', country_table) }}
         where
-            date(_PARTITIONTIME) between {{ get_last_n_days_date_range(150) }}
-            or date(_PARTITIONTIME) between {{ get_last_n_days_prev_year(150) }}
+            date(_PARTITIONTIME) between {{ get_last_n_days_date_range(120) }}
+            or date(_PARTITIONTIME) between {{ get_last_n_days_prev_year(120) }}
 
         {% if not loop.last -%} union all {%- endif %}
     {% endfor %}
